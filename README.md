@@ -1,72 +1,119 @@
-# Getting Started with Create React App
+# CSS Grid Course
 
-[Link do curso](https://courses.wesbos.com/account)
+[Link do Curso](https://courses.wesbos.com/account)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi feito para testar e melhorar minhas habilidades com CSS Grid.
 
-## Available Scripts
+## 01 - Fundamentos
 
-In the project directory, you can run:
+- Todos nodes filhos de um elemento com display:grid, sempre irão ser items de grid explicitamente
+- A declaração direta é chamada de implicit grid
+- Utilizando a propriedade `auto` ele se auto ajusta com espaço que lhe fica disponível
+- Os números em relação ao grid não significa a coluna em si, mas sim o começo e aonde termina
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```html
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<section class="container"> <!-- Elemento com grid aplicado -->
+    <article></article> <!-- Item do grid -->
+    <article></article> <!-- Item do grid -->
+    <article></article> <!-- Item do grid -->
+</section>
 
-### `yarn test`
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```css
+ .exemplo {
+    display:grid;
+    grid-template-columns: 100px auto 100px 100px;
+    grid-gap: 20px;
+    grid-template-rows:1fr 1fr;
+ }
+```
 
-### `yarn build`
+## 02 - Implicito X Explicito
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- O modo explicito significa quando há declaração EXATAMENTE do que elas precisam ser
+- O modo implicito acontece quando o navegador precisa alocar por exemplo: 4 itens com somente duas colunas
+- Então a implicidade ocorre no momento da criação da segunda linha
+(grid-row) para encaixar os elementos.
+- O tamanho da implicidade pode ser manipulada com auto-rows/columns.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+```css
+ .exemplo {
+    display:grid;
+    grid-template-columns: 1fr 100px;
+    grid-auto-rows: 250px;
+ }
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 03 - Auto Flow
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- O auto flow determina se o elemento novo com o grid explicito definido anteriormente irá se ajuntar com a coluna ou linha do grid.
+- Por padrão, ele sempre irá adicionar uma nova linha para ocorrer a implicidade.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+```css
+ .exemplo {
+    display:grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-template-rows: 1fr;
+    /* Será somente uma linha, os novos itens irão surgir como uma nova coluna */
+ }
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 04 - Definição de tamanhos
 
-### Code Splitting
+- Não utilize a definição do grid com %,
+- Porque a porcentagem é relacionado ao algo que tenha como pai algo pré-definido
+> container pai como width: 100vw, no node filho pode-se usar 50% (50vw)
+- Opte pelas medidas de frações, pois elas realizam o calculo automatico para nós
+- A definição do grid-auto-rows por padrão é 1fr ao declarar o display: grid
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[Vídeo explicativo sobre o conceito de utilizar fr](https://www.youtube.com/watch?v=Dp7kOWhAjuo)
 
-### Analyzing the Bundle Size
+```css
+ .exemplo {
+    display:grid;
+    grid-template-columns: 2fr auto 200px;
+    /*  podemos combinar a utilização, mas não é muito recomendável */
+ }
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 05 - Repeat
 
-### Making a Progressive Web App
+- A função repeat evita repetição desnecessária em relação a quantidade de elementos definidos
+- Podemos utilizar da melhor forma que for convecional ao código.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```css
+ .exemplo {
+    display:grid;
+    grid-template-columns: 2fr repeat(3, 1fr auto) 200px;
+    grid-template-rows: repeat(2, 1fr);
+    /*  
+    grid-template-columns: 2fr 1fr auto 1fr auto 1fr auto 200px;
+    grid-template-rows: 1fr 1fr;
+    */
+ }
+```
+## 06 - Tamanho de itens do grid
 
-### Deployment
+- Não podemos definir o width explicito no grid item
+- Pois todos os itens são afetados pela explicidade
+- Para alterar a quantidade de colunas ocupadas, utilizados a propriedade span
+> coluna: grid-column / linha: grid-row
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```css
+ .exemplo {
+   grid-column: span 3;
+   grid-row: span 2;
+   height:100%;
+ }
+```

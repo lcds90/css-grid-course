@@ -6,8 +6,8 @@ import styled from 'styled-components';
 */
 export const Container = styled.main`
     background-color: ${({ theme: { colors } }) => colors.others.tertiary};
-    height:100vh;
-    max-height: 100vh;
+    max-width:100%;
+    height:100%;
     overflow:auto;
 
     display:grid;

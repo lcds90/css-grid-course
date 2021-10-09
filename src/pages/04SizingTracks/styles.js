@@ -1,17 +1,21 @@
 import styled from 'styled-components';
 
-// SECTION 03 - Auto Flow
+// SECTION 04 - Sizing Tracks
 /*
-  O auto flow determina se o elemento irá se ajuntar com a coluna ou linha do grid.
-*/
+  Não utilize a definição do grid com %,
+  Porque a porcentagem é relacionado ao algo que tenha como pai algo pré-definido
+  Ex: container pai como width: 100vw, no node filho pode-se usar 50% (50vw)
+  Opte pelas medidas de frações, pois elas realizam o calculo automatico para nós (https://www.youtube.com/watch?v=Dp7kOWhAjuo)
+  A definição do grid-auto-rows por padrão é 1fr ao declarar o display: grid
+  */
 export const Container = styled.main`
     background-color: ${({ theme: { colors } }) => colors.secondary.dark};
-    height:100vh;
-    max-height: 100vh;
+    max-width:100%;
+    height:100%;
     overflow:auto;
 
     display:grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr;
     grid-gap: 20px;
     grid-auto-flow: column;

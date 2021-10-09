@@ -3,20 +3,25 @@ import styled from 'styled-components';
 
 export const Navbar = styled.nav`
     ${({ showNavbar }) => (showNavbar ? `
-    height:30vh;
+    height:50vh;
+    padding: 25px;
     `
     : `
-    height: 1vh;
+    height: 5vh;
+    padding: 0;
     `)};
 
     
     display:grid;
-    transition: height 1.25s ease;
+    transition: height 1.25s ease, padding 1.25s ease;
     position:sticky;
     top:0;
     align-items:center;
-    grid-auto-flow:column;
-    gap:25px;
+    grid-auto-columns: 1fr;
+    background: black;
+    overflow-y:scroll;
+    max-width:100%;
+    gap:20px;
 `;
 
 export const NavItem = styled(Link)`
@@ -33,4 +38,6 @@ export const NavItem = styled(Link)`
     border-radius:10px;
     font-style:none;
     text-align:center;
+    display:grid;
+    place-items:center;
 `;

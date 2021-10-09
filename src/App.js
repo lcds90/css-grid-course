@@ -3,7 +3,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
 import theme from './theme';
 import {
@@ -16,6 +16,13 @@ import {
   Repeat,
 } from './pages';
 import Navbar from './components/Navbar';
+
+const AppContainer = styled.main`
+  display:grid;
+  grid: 0.05fr 1fr / 1fr;
+  height:100vh;
+  width:100vw;
+`;
 
 function App() {
   const pages = [
@@ -61,16 +68,18 @@ function App() {
       <ThemeProvider theme={theme}>
         <Reset />
         <Router>
-          <Navbar links={pages} />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/01" component={Fundamentals} />
-            <Route exact path="/02" component={ExplicityImplicit} />
-            <Route exact path="/03" component={AutoFlow} />
-            <Route exact path="/04" component={SizingTracks} />
-            <Route exact path="/05" component={Repeat} />
-            <Route exact path="/06" component={SizingGrid} />
-          </Switch>
+          <AppContainer>
+            <Navbar links={pages} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/01" component={Fundamentals} />
+              <Route exact path="/02" component={ExplicityImplicit} />
+              <Route exact path="/03" component={AutoFlow} />
+              <Route exact path="/04" component={SizingTracks} />
+              <Route exact path="/05" component={Repeat} />
+              <Route exact path="/06" component={SizingGrid} />
+            </Switch>
+          </AppContainer>
         </Router>
       </ThemeProvider>
     </>
